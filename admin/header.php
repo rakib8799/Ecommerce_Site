@@ -192,8 +192,8 @@ if (!isset($_SESSION['user'])) {
 					<li class="treeview <?php if (($cur_page == 'add_employee.php') || ($cur_page == 'customer-add.php') || ($cur_page == 'add_employee.php')) {
 											echo 'active';
 										} ?>">
-						<a href="add_employee.php">
-							<i class="fa fa-user-plus"></i> <span>Add Employee</span>
+						<a href="employee.php">
+							<i class="fa fa-user-plus"></i> <span>Employee</span>
 						</a>
 					</li>
 
