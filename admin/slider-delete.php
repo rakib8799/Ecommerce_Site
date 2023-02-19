@@ -1,7 +1,7 @@
 <?php require_once('header.php'); ?>
 
 <?php
-if(!isset($_REQUEST['id'])) {
+if (!isset($_REQUEST['id'])) {
 	header('location: logout.php');
 	exit;
 } else {
@@ -9,7 +9,7 @@ if(!isset($_REQUEST['id'])) {
 	$statement = $pdo->prepare("SELECT * FROM tbl_slider WHERE id=?");
 	$statement->execute(array($_REQUEST['id']));
 	$total = $statement->rowCount();
-	if( $total == 0 ) {
+	if ($total == 0) {
 		header('location: logout.php');
 		exit;
 	}
@@ -18,22 +18,22 @@ if(!isset($_REQUEST['id'])) {
 
 <?php
 
-	// Getting photo ID to unlink from folder
-	$statement = $pdo->prepare("SELECT * FROM tbl_slider WHERE id=?");
-	$statement->execute(array($_REQUEST['id']));
-	$result = $statement->fetchAll(PDO::FETCH_ASSOC);							
-	foreach ($result as $row) {
-		$photo = $row['photo'];
-	}
+// Getting photo ID to unlink from folder
+$statement = $pdo->prepare("SELECT * FROM tbl_slider WHERE id=?");
+$statement->execute(array($_REQUEST['id']));
+$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+foreach ($result as $row) {
+	$photo = $row['photo'];
+}
 
-	// Unlink the photo
-	if($photo!='') {
-		unlink('../assets/uploads/'.$photo);	
-	}
+// Unlink the photo
+if ($photo != '') {
+	unlink('assets/uploads/' . $photo);
+}
 
-	// Delete from tbl_slider
-	$statement = $pdo->prepare("DELETE FROM tbl_slider WHERE id=?");
-	$statement->execute(array($_REQUEST['id']));
+// Delete from tbl_slider
+$statement = $pdo->prepare("DELETE FROM tbl_slider WHERE id=?");
+$statement->execute(array($_REQUEST['id']));
 
-	header('location: slider.php');
+header('location: slider.php');
 ?>

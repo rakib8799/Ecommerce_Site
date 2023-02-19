@@ -74,7 +74,7 @@ if (isset($_POST['form1'])) {
 <html>
 
 <body>
-    <div class="page-banner" style="background-image: url(assets/uploads/<?php echo $banner_cart; ?>)">
+    <div class="page-banner" style="background-image: url(admin/assets/uploads/<?php echo $banner_cart; ?>)">
         <div class="overlay"></div>
         <div class="page-banner-inner">
             <h1><?php echo LANG_VALUE_18; ?></h1>
@@ -166,9 +166,9 @@ if (isset($_POST['form1'])) {
                                         <tr>
                                             <td><?php echo $i; ?></td>
                                             <td>
-                                                <img src="assets/uploads/<?php echo $arr_cart_p_featured_photo[$i]; ?>" alt="">
+                                                <img src="admin/assets/uploads/<?php echo $arr_cart_p_featured_photo[$i]; ?>" alt="">
                                             </td>
-                                            <td><?php echo $arr_cart_p_name[$i]; ?></td>
+                                            <td><a href="product.php?id=<?php echo $arr_cart_p_id[$i] ?>"><?php echo $arr_cart_p_name[$i]; ?></a></td>
                                             <td><?php echo $arr_cart_size_name[$i]; ?></td>
                                             <td><?php echo $arr_cart_color_name[$i]; ?></td>
                                             <td><?php echo "&#2547;" ?><?php echo $arr_cart_p_current_price[$i]; ?></td>

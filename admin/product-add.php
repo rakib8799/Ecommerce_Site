@@ -86,7 +86,7 @@ if (isset($_POST['form1'])) {
 				$my_ext1 = pathinfo($photo[$i], PATHINFO_EXTENSION);
 				if ($my_ext1 == 'jpg' || $my_ext1 == 'png' || $my_ext1 == 'jpeg' || $my_ext1 == 'gif') {
 					$final_name1[$m] = $z . '.' . $my_ext1;
-					move_uploaded_file($photo_temp[$i], "../assets/uploads/product_photos/" . $final_name1[$m]);
+					move_uploaded_file($photo_temp[$i], "assets/uploads/product_photos/" . $final_name1[$m]);
 					$m++;
 					$z++;
 				}
@@ -101,7 +101,7 @@ if (isset($_POST['form1'])) {
 		}
 
 		$final_name = 'product-featured-' . $ai_id . '.' . $ext;
-		move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
+		move_uploaded_file($path_tmp, 'assets/uploads/' . $final_name);
 
 		//Saving data into the main table tbl_product
 		$statement = $pdo->prepare("INSERT INTO tbl_product(

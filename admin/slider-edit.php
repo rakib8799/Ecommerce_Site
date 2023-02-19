@@ -1,45 +1,45 @@
 <?php require_once('header.php'); ?>
 
 <?php
-if(isset($_POST['form1'])) {
+if (isset($_POST['form1'])) {
 	$valid = 1;
 
-	
-    $path = $_FILES['photo']['name'];
-    $path_tmp = $_FILES['photo']['tmp_name'];
 
-    if($path!='') {
-        $ext = pathinfo( $path, PATHINFO_EXTENSION );
-        $file_name = basename( $path, '.' . $ext );
-        if( $ext!='jpg' && $ext!='png' && $ext!='jpeg' && $ext!='gif' ) {
-            $valid = 0;
-            $error_message .= 'You must have to upload jpg, jpeg, gif or png file<br>';
-        }
-    }
+	$path = $_FILES['photo']['name'];
+	$path_tmp = $_FILES['photo']['tmp_name'];
 
-	if($valid == 1) {
+	if ($path != '') {
+		$ext = pathinfo($path, PATHINFO_EXTENSION);
+		$file_name = basename($path, '.' . $ext);
+		if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
+			$valid = 0;
+			$error_message .= 'You must have to upload jpg, jpeg, gif or png file<br>';
+		}
+	}
 
-		if($path == '') {
+	if ($valid == 1) {
+
+		if ($path == '') {
 			$statement = $pdo->prepare("UPDATE tbl_slider SET heading=?, content=?, button_text=?, button_url=?, position=? WHERE id=?");
-    		$statement->execute(array($_POST['heading'],$_POST['content'],$_POST['button_text'],$_POST['button_url'],$_POST['position'],$_REQUEST['id']));
+			$statement->execute(array($_POST['heading'], $_POST['content'], $_POST['button_text'], $_POST['button_url'], $_POST['position'], $_REQUEST['id']));
 		} else {
 
-			unlink('../assets/uploads/'.$_POST['current_photo']);
+			unlink('assets/uploads/' . $_POST['current_photo']);
 
-			$final_name = 'slider-'.$_REQUEST['id'].'.'.$ext;
-        	move_uploaded_file( $path_tmp, '../assets/uploads/'.$final_name );
+			$final_name = 'slider-' . $_REQUEST['id'] . '.' . $ext;
+			move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
-        	$statement = $pdo->prepare("UPDATE tbl_slider SET photo=?, heading=?, content=?, button_text=?, button_url=?, position=? WHERE id=?");
-    		$statement->execute(array($final_name,$_POST['heading'],$_POST['content'],$_POST['button_text'],$_POST['button_url'],$_POST['position'],$_REQUEST['id']));
-		}	   
+			$statement = $pdo->prepare("UPDATE tbl_slider SET photo=?, heading=?, content=?, button_text=?, button_url=?, position=? WHERE id=?");
+			$statement->execute(array($final_name, $_POST['heading'], $_POST['content'], $_POST['button_text'], $_POST['button_url'], $_POST['position'], $_REQUEST['id']));
+		}
 
-	    $success_message = 'Slider is updated successfully!';
+		$success_message = 'Slider is updated successfully!';
 	}
 }
 ?>
 
 <?php
-if(!isset($_REQUEST['id'])) {
+if (!isset($_REQUEST['id'])) {
 	header('location: logout.php');
 	exit;
 } else {
@@ -48,7 +48,7 @@ if(!isset($_REQUEST['id'])) {
 	$statement->execute(array($_REQUEST['id']));
 	$total = $statement->rowCount();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-	if( $total == 0 ) {
+	if ($total == 0) {
 		header('location: logout.php');
 		exit;
 	}
@@ -83,18 +83,18 @@ foreach ($result as $row) {
 	<div class="row">
 		<div class="col-md-12">
 
-			<?php if($error_message): ?>
-			<div class="callout callout-danger">
-				<p>
-				<?php echo $error_message; ?>
-				</p>
-			</div>
+			<?php if ($error_message) : ?>
+				<div class="callout callout-danger">
+					<p>
+						<?php echo $error_message; ?>
+					</p>
+				</div>
 			<?php endif; ?>
 
-			<?php if($success_message): ?>
-			<div class="callout callout-success">
-				<p><?php echo $success_message; ?></p>
-			</div>
+			<?php if ($success_message) : ?>
+				<div class="callout callout-success">
+					<p><?php echo $success_message; ?></p>
+				</div>
 			<?php endif; ?>
 
 			<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
@@ -141,12 +141,18 @@ foreach ($result as $row) {
 							<label for="" class="col-sm-2 control-label">Position </label>
 							<div class="col-sm-6">
 								<select name="position" class="form-control">
-									<option value="Left" <?php if($position == 'Left') {echo 'selected';} ?>>Left</option>
-									<option value="Center" <?php if($position == 'Center') {echo 'selected';} ?>>Center</option>
-									<option value="Right" <?php if($position == 'Right') {echo 'selected';} ?>>Right</option>
+									<option value="Left" <?php if ($position == 'Left') {
+																echo 'selected';
+															} ?>>Left</option>
+									<option value="Center" <?php if ($position == 'Center') {
+																echo 'selected';
+															} ?>>Center</option>
+									<option value="Right" <?php if ($position == 'Right') {
+																echo 'selected';
+															} ?>>Right</option>
 								</select>
 							</div>
-						</div>				
+						</div>
 						<div class="form-group">
 							<label for="" class="col-sm-2 control-label"></label>
 							<div class="col-sm-6">

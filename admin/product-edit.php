@@ -95,7 +95,7 @@ if (isset($_POST['form1'])) {
 				$my_ext1 = pathinfo($photo[$i], PATHINFO_EXTENSION);
 				if ($my_ext1 == 'jpg' || $my_ext1 == 'png' || $my_ext1 == 'jpeg' || $my_ext1 == 'gif') {
 					$final_name1[$m] = $z . '.' . $my_ext1;
-					move_uploaded_file($photo_temp[$i], "../assets/uploads/product_photos/" . $final_name1[$m]);
+					move_uploaded_file($photo_temp[$i], "assets/uploads/product_photos/" . $final_name1[$m]);
 					$m++;
 					$z++;
 				}
@@ -146,10 +146,10 @@ if (isset($_POST['form1'])) {
 			));
 		} else {
 
-			unlink('../assets/uploads/' . $_POST['current_photo']);
+			unlink('assets/uploads/' . $_POST['current_photo']);
 
 			$final_name = 'product-featured-' . $_REQUEST['id'] . '.' . $ext;
-			move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
+			move_uploaded_file($path_tmp, 'assets/uploads/' . $final_name);
 
 
 			$statement = $pdo->prepare("UPDATE tbl_product SET 
@@ -497,7 +497,7 @@ foreach ($result as $row) {
 						<div class="form-group">
 							<label for="" class="col-sm-4 control-label">Existing Featured Photo</label>
 							<div class="col-sm-4" style="padding-top:4px;">
-								<img src="../assets/uploads/<?php echo $p_featured_photo; ?>" alt="" style="width:150px;">
+								<img src="assets/uploads/<?php echo $p_featured_photo; ?>" alt="" style="width:150px;">
 								<input type="hidden" name="current_photo" value="<?php echo $p_featured_photo; ?>">
 							</div>
 						</div>
@@ -520,7 +520,7 @@ foreach ($result as $row) {
 										?>
 											<tr>
 												<td>
-													<img src="../assets/uploads/product_photos/<?php echo $row['photo']; ?>" alt="" style="width:150px;margin-bottom:5px;">
+													<img src="assets/uploads/product_photos/<?php echo $row['photo']; ?>" alt="" style="width:150px;margin-bottom:5px;">
 												</td>
 												<td style="width:28px;">
 													<a onclick="return confirmDelete();" href="product-other-photo-delete.php?id=<?php echo $row['pp_id']; ?>&id1=<?php echo $_REQUEST['id']; ?>" class="btn btn-danger btn-xs">X</a>

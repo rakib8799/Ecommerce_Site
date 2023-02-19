@@ -104,7 +104,7 @@
 								?>
 									<tr>
 										<td><?php echo $i; ?></td>
-										<td style="width:82px;"><img src="../assets/uploads/<?php echo $row['p_featured_photo']; ?>" alt="<?php echo $row['p_name']; ?>" style="width:80px;"></td>
+										<td style="width:82px;"><img src="assets/uploads/<?php echo $row['p_featured_photo']; ?>" alt="<?php echo $row['p_name']; ?>" style="width:80px;"></td>
 										<td><?php echo $row['p_name']; ?></td>
 										<td>&#2547;<?php echo $row['p_old_price']; ?></td>
 										<td>&#2547;<?php echo $row['p_buy_price']; ?></td>
